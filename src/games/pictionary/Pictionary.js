@@ -1,9 +1,17 @@
 import GameComponent from '../../GameComponent.js';
 import React from 'react';
-import UserApi from '../../UserApi.js';
 import firebase from 'firebase';
+import UserApi from '../../UserApi.js';
+import Board from './Board.js';
+import Player from './Player.js';
+import Word from './Word.js';
 
 export default class Pictionary extends GameComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = { }
+    };
 
     render() {
         var id = this.getSessionId();
@@ -11,6 +19,7 @@ export default class Pictionary extends GameComponent {
           <li key={user_id}>{UserApi.getName(user_id)}</li>
         ));
         var creator = UserApi.getName(this.getSessionCreatorUserId());
+
         return (
           <div>
             <p>Session ID: {id}</p>
@@ -19,7 +28,17 @@ export default class Pictionary extends GameComponent {
             <ul>
               {users}
             </ul>
-            <p>Hi</p>
+            
+            <div className= "Word">
+              <Word />
+            </div>
+            <div className= "Players">
+              <Player />
+            </div>
+            <div className= "Board">
+              <Board />
+            </div>
+              
           </div>
         );
       }

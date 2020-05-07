@@ -17,6 +17,15 @@ import Pictionary from './games/pictionary/Pictionary.js';
 
 const gameData = {
 
+  Pictionary: {
+    title: "Pictionary",
+    authors: "Justin Huey",
+    description: "Draw and guess",
+    minUsers: 2,
+    maxUsers: 5,
+    component: Pictionary,
+  },
+
   chatroom: {
     title: "Chat Room",
     authors: "Joe Tessler",
@@ -24,15 +33,6 @@ const gameData = {
     minUsers: 1,
     maxUsers: 10,
     component: ChatRoom,
-  },
-
-  tictactoe: {
-    title: "Pictionary",
-    authors: "Justin Huey",
-    description: "Draw and guess",
-    minUsers: 2,
-    maxUsers: 5,
-    component: Pictionary,
   },
 
   tictactoe: {
