@@ -20,7 +20,7 @@ export default class Chat extends React.Component {
         };
         
           handleKeyEvent(key) {
-            if (key === "Enter" && this.state.input.length > 0) {
+            if (key === "Enter" && this.state.input.length > 0 && playTime == True) {
               var chatData = {
                 message: this.state.input,
                 timestamp: firebase.database.ServerValue.TIMESTAMP,

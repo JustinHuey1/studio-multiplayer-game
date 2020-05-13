@@ -6,7 +6,7 @@ export default class Timer extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { currentCount: 60}
+        this.state = { currentCount: 60, Play: True}
         };
         
     timer() {
@@ -15,6 +15,7 @@ export default class Timer extends React.Component {
         })
         if(this.state.currentCount < 1) { 
             clearInterval(this.intervalId);
+            this.setState( { Play: False });
         }
     }
 
@@ -30,7 +31,12 @@ export default class Timer extends React.Component {
 
         return(
             <div>
-                <p>{this.state.currentCount}</p>
+                <div className= "Timer">
+                    <p>{this.state.currentCount}</p>
+                </div>
+                <div className= "Chat">
+                    <Chat playTime={this.state.Play}/>
+                </div>
             </div>
         );
     }

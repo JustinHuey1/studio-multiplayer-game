@@ -10,9 +10,14 @@ export default class Word extends React.Component {
         this.state = { number: 0}
         };
 
+    addOne(){
+        this.setState({ number: this.state.number + 1});
+
+    }
+
     render() {
-        let words = ["blah", "ble"];
-        console.log(words);
+        let words = ["shark", "pencil", "bicycle", "book"];
+        console.log(words[this.state.number]);
         return(
             <div>
                 <div className= "Chat">
