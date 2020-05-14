@@ -21,7 +21,7 @@ const gameData = {
     title: "Pictionary",
     authors: "Justin Huey",
     description: "Draw and guess",
-    minUsers: 2,
+    minUsers: 1,
     maxUsers: 5,
     component: Pictionary,
   },

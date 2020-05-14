@@ -1,6 +1,7 @@
 import React from 'react';
 import firebase from 'firebase';
 import UserApi from '../../UserApi.js';
+import './Pic.css';
 
 export default class Player extends React.Component {
 
@@ -11,15 +12,17 @@ export default class Player extends React.Component {
         };
         
     render() {
-        var id = this.getSessionId();
-        var users = this.getSessionUserIds().map((user_id) => (
-            <li key={user_id}>{UserApi.getPhotoUrl(user_id)}    {UserApi.getName(user_id)}</li>
-        ));
+        // var id = this.getSessionId();
+        // var users = this.getSessionUserIds().map((user_id) => (
+        //     <li key={user_id}>{UserApi.getPhotoUrl(user_id)}    {UserApi.getName(user_id)}</li>
+        // ));
 
         return(
             <div>
+                <h1>Players: </h1>
                 <ul>
-                    {users}
+                    {this.props.people}
+                    <p>Points:</p>
                 </ul> 
             </div>
         );

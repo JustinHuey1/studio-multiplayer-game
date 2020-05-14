@@ -1,6 +1,7 @@
 import React from 'react';
 import firebase from 'firebase';
 import Chat from './Chat.js';
+import './Pic.css';
 
 export default class Word extends React.Component {
     

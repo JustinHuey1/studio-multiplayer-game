@@ -1,12 +1,14 @@
 import React from 'react';
 import firebase from 'firebase';
+import Chat from './Chat.js';
+import './Pic.css';
 
 export default class Timer extends React.Component {
 
     constructor(props) {
         super(props);
 
-        this.state = { currentCount: 60, Play: True}
+        this.state = { currentCount: 60, Play: true}
         };
         
     timer() {
@@ -15,7 +17,7 @@ export default class Timer extends React.Component {
         })
         if(this.state.currentCount < 1) { 
             clearInterval(this.intervalId);
-            this.setState( { Play: False });
+            this.setState( { Play: false });
         }
     }
 
@@ -32,7 +34,7 @@ export default class Timer extends React.Component {
         return(
             <div>
                 <div className= "Timer">
-                    <p>{this.state.currentCount}</p>
+                    <h1>Time Left: {this.state.currentCount}</h1>
                 </div>
                 <div className= "Chat">
                     <Chat playTime={this.state.Play}/>

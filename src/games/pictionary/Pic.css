@@ -1,0 +1,159 @@
+/* Board */
+
+.Black{
+    background-color: black;
+    color: white;
+
+    border-radius: 50%;
+    margin: 4px 2%;
+    padding: 1%;
+    width: 6%;
+}
+
+.Blue{
+    background-color: aqua;
+    color: yellow;
+
+    border-radius: 50%;
+    margin: 4px 2%;
+    padding: 1%;
+    width: 6%;
+}
+
+.Green{
+    background-color: green;
+    color: red;
+
+    border-radius: 50%;
+    margin: 4px 2%;
+    padding: 1%;
+    width: 6%;
+}
+
+.Yellow{
+    background-color: yellow;
+    color: purple;
+
+    border-radius: 50%;
+    margin: 4px 2%;
+    padding: 1%;
+    width: 6%;
+}
+
+.Red{
+    background-color: red;
+    color: green;
+
+    border-radius: 50%;
+    margin: 4px 2%;
+    padding: 1%;
+    width: 6%;
+}
+
+.Purple{
+    background-color: purple;
+    color: yellow;
+    
+    border-radius: 50%;
+    margin: 4px 2%;
+    padding: 1%;
+    width: 6%;
+}
+
+.Pink{
+    background-color: pink;
+    color: purple;
+
+    border-radius: 50%;
+    margin: 4px 2%;
+    padding: 1%;
+    width: 6%;
+}
+
+.dBlue{
+    background-color: darkblue;
+    color: red;
+
+    border-radius: 50%;
+    margin: 4px 2%;
+    padding: 1%;
+    width: 6%;
+}
+
+.middle{
+    display: flex;
+    justify-content: center;
+
+    position: absolute;
+    top: 20%;
+    left: 18%;
+}
+
+.UI{
+    display: flex;
+    justify-content: center;
+
+    position: absolute;
+    bottom: 18%;
+    left: 30%;
+}
+
+.UI1{
+    display: flex;
+    justify-content: center;
+
+    position: absolute;
+    bottom: 13.5%;
+    width: 92%;
+}
+
+.Colors1{
+    display: flex;
+    justify-content: center;
+
+    position: absolute;
+    bottom: 4%;
+    width: 92%;
+}
+
+.Colors2{
+    display: flex;
+    justify-content: center;
+
+    position: absolute;
+    bottom: -2%;
+    width: 92%;
+}
+
+.clear{
+    position: relative;
+    left: 50%;
+    height: 30px;
+    width: 100px;
+    border-radius: 25%;
+}
+
+.undo{
+    position: absolute;
+    left: 250%;
+    height: 30px;
+    width: 100px;   
+    border-radius: 25%;
+}
+
+input{
+    border: 2px solid black;
+    background-color: white;
+
+    text-shadow: none;
+    font-size: 100%;
+    height: 90%;
+    width: 50px;
+
+    max-width: 50px;
+    max-height: 25px;
+}
+  
+canvas{
+    background-color: transparent;
+}

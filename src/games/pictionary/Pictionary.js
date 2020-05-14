@@ -5,6 +5,7 @@ import UserApi from '../../UserApi.js';
 import Board from './Board.js';
 import Player from './Player.js';
 import Word from './Word.js';
+import './Pic.css';
 
 export default class Pictionary extends GameComponent {
   constructor(props) {
@@ -24,21 +25,16 @@ export default class Pictionary extends GameComponent {
           <div>
             <p>Session ID: {id}</p>
             <p>Session creator: {creator}</p>
-            <p>Session users:</p>
-            <ul>
-              {users}
-            </ul>
             
             <div className= "Word">
               <Word />
             </div>
             <div className= "Players">
-              <Player />
+              <Player people= {users}/>
             </div>
             <div className= "Board">
               <Board />
             </div>
-              
           </div>
         );
       }

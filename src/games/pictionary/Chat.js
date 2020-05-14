@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import UserApi from '../../UserApi.js';
 import firebase from 'firebase';
 import { List, ListItem } from 'material-ui/List';
+import './Pic.css';
 
 export default class Chat extends React.Component {
 
@@ -20,12 +21,16 @@ export default class Chat extends React.Component {
         };
         
           handleKeyEvent(key) {
-            if (key === "Enter" && this.state.input.length > 0 && playTime == True) {
+            if (key === "Enter" && this.state.input.length > 0 && this.props.playTime === true) {
               var chatData = {
                 message: this.state.input,
                 timestamp: firebase.database.ServerValue.TIMESTAMP,
                 user: this.getMyUserId(),
               }
+              if (chatData.message.toLowerCase() === this.props.answer){
+                console.log("Winner")
+              }
+
               this.getSessionDatabaseRef().push(chatData, (error) => {
                 if (error) {
                   console.error("Error storing session metadata", error);
@@ -39,7 +44,6 @@ export default class Chat extends React.Component {
             var chatListItems = this.state.chats.slice(0, 10).map((chat, i) => (
               <ListItem
                   key={chat.id}
-                  style={{opacity: (10 - i) / 10}}
                   disabled={true}
                   primaryText={UserApi.getName(chat.user)}
                   secondaryText={chat.message}
@@ -47,6 +51,10 @@ export default class Chat extends React.Component {
             ));
             return (
               <div>
+                <TextField
+                  onChange={(event) => this.setState({ input: event.target.value })}
+                  onKeyPress={(event) => this.handleKeyEvent(event.key)}
+                  value={this.state.input} />
                 <List>
                   {chatListItems}
                 </List>
