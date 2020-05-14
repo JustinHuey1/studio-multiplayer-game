@@ -1,6 +1,5 @@
 import React from 'react';
 import firebase from 'firebase';
-import Timer from './Timer.js';
 import Chat from './Chat.js';
 import CanvasDraw from "react-canvas-draw"; 
 import './Pic.css';
@@ -10,7 +9,7 @@ export default class Board extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { color: "#000000", brushRadius: 5}
+        this.state = { color: "#000000", brushRadius: 5, sum: 0}
 
         this.clearBoard = this.clearBoard.bind(this);
         this.undoBoard = this.undoBoard.bind(this);
@@ -33,7 +32,6 @@ export default class Board extends React.Component {
 
         return(
             <div>
-                <Timer />
                 <div className= "middle">
                     <CanvasDraw
                         style={{
@@ -44,7 +42,7 @@ export default class Board extends React.Component {
                         brushRadius={this.state.brushRadius}
                         onChange={() => console.log("onChange")}
                         canvasWidth= "700px"
-                        lazyRadius= "0"
+                        lazyRadius= {this.state.sum}
                     />
                 </div>
 

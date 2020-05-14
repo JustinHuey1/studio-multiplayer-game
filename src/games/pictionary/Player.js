@@ -8,7 +8,7 @@ export default class Player extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { }
+        this.state = { player1: 0}
         };
         
     render() {
@@ -22,7 +22,7 @@ export default class Player extends React.Component {
                 <h1>Players: </h1>
                 <ul>
                     {this.props.people}
-                    <p>Points:</p>
+                    <p>Points: {this.state.player1}</p>
                 </ul> 
             </div>
         );

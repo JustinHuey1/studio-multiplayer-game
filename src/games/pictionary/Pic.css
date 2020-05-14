@@ -157,3 +157,13 @@ input{
 canvas{
     background-color: transparent;
 }
+
+/* Word */
+
+.Word{
+    display: flex;
+    justify-content: center;
+    position: relative; 
+    bottom: 285px;
+    right: 50px;
+}
