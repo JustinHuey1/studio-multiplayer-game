@@ -12,12 +12,13 @@ export default class Pictionary extends GameComponent {
   constructor(props) {
     super(props);
 
-    this.state = { currentCount: 60, Play: true }
+    this.state = { currentCount: 60, Play: true, number: 0, words: ["shark", "pencil", "bicycle", "book"], string: []}
     };
 
     timer() {
       this.setState({
-          currentCount: this.state.currentCount - 1
+          currentCount: this.state.currentCount - 1,
+          once: true
       })
       if(this.state.currentCount < 1) { 
           clearInterval(this.intervalId);
@@ -40,6 +41,7 @@ export default class Pictionary extends GameComponent {
         ));
         var creator = UserApi.getName(this.getSessionCreatorUserId());
 
+        
         return (
           <div>
             <p>Session ID: {id}</p>
@@ -55,7 +57,7 @@ export default class Pictionary extends GameComponent {
               <Board />
             </div>
             <div className= "Word">
-              <Word time = {this.state.currentCount}/>
+              <Word time= {this.state.currentCount} word= {this.state.string} prompt= {prompt}/>
             </div>
           </div>
         );

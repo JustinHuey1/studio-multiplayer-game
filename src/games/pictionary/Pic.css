@@ -10,9 +10,9 @@
     width: 6%;
 }
 
-.Blue{
-    background-color: aqua;
-    color: yellow;
+.dBlue{
+    background-color: darkblue;
+    color: #8b4600;
 
     border-radius: 50%;
     margin: 4px 2%;
@@ -20,29 +20,9 @@
     width: 6%;
 }
 
-.Green{
-    background-color: green;
-    color: red;
-
-    border-radius: 50%;
-    margin: 4px 2%;
-    padding: 1%;
-    width: 6%;
-}
-
-.Yellow{
-    background-color: yellow;
-    color: purple;
-
-    border-radius: 50%;
-    margin: 4px 2%;
-    padding: 1%;
-    width: 6%;
-}
-
-.Red{
-    background-color: red;
-    color: green;
+.Brown{
+    background-color: #A52A2A;
+    color: #2aa52a;
 
     border-radius: 50%;
     margin: 4px 2%;
@@ -60,8 +40,38 @@
     width: 6%;
 }
 
-.Pink{
-    background-color: pink;
+.Green{
+    background-color: green;
+    color: red;
+
+    border-radius: 50%;
+    margin: 4px 2%;
+    padding: 1%;
+    width: 6%;
+}
+
+.Red{
+    background-color: red;
+    color: green;
+
+    border-radius: 50%;
+    margin: 4px 2%;
+    padding: 1%;
+    width: 6%;
+}
+
+.Blue{
+    background-color: aqua;
+    color: yellow;
+
+    border-radius: 50%;
+    margin: 4px 2%;
+    padding: 1%;
+    width: 6%;
+}
+
+.Yellow{
+    background-color: yellow;
     color: purple;
 
     border-radius: 50%;
@@ -70,9 +80,29 @@
     width: 6%;
 }
 
-.dBlue{
-    background-color: darkblue;
-    color: red;
+.Pink{
+    background-color: pink;
+    color: #b4ff69;
+
+    border-radius: 50%;
+    margin: 4px 2%;
+    padding: 1%;
+    width: 6%;
+}
+
+.Tan{
+    background-color: #F0E3DF;
+    color: #11e4d6;
+
+    border-radius: 50%;
+    margin: 4px 2%;
+    padding: 1%;
+    width: 6%;
+}
+
+.tDawn{
+    background-color: #BDC3B9;
+    color: black;
 
     border-radius: 50%;
     margin: 4px 2%;
@@ -94,7 +124,7 @@
     justify-content: center;
 
     position: absolute;
-    bottom: 18%;
+    bottom: 16%;
     left: 30%;
 }
 
@@ -103,7 +133,7 @@
     justify-content: center;
 
     position: absolute;
-    bottom: 13.5%;
+    bottom: 12%;
     width: 92%;
 }
 
@@ -127,17 +157,28 @@
 
 .clear{
     position: relative;
-    left: 50%;
-    height: 30px;
+    left: -20%;
+    height: 50px;
     width: 100px;
     border-radius: 25%;
 }
 
 .undo{
     position: absolute;
-    left: 250%;
-    height: 30px;
+    left: 80%;
+    height: 50px;
     width: 100px;   
+    border-radius: 25%;
+}
+
+.White{
+    background-color: #ffffff;
+    color: black;
+
+    position: relative;
+    left: 140%;
+    height: 50px;
+    width: 100px;
     border-radius: 25%;
 }
 
@@ -164,6 +205,6 @@ canvas{
     display: flex;
     justify-content: center;
     position: relative; 
-    bottom: 285px;
+    bottom: 280px;
     right: 50px;
 }
