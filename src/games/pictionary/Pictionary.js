@@ -23,6 +23,7 @@ export default class Pictionary extends GameComponent {
       index: 0, 
       index1: 0, 
       once: true,
+      saveNumbers: [],
       }
     };
 
@@ -38,7 +39,7 @@ export default class Pictionary extends GameComponent {
     }
 
     componentDidMount() {
-        this.intervalId = setInterval(this.timer.bind(this), 50);
+        this.intervalId = setInterval(this.timer.bind(this), 500);
     }
 
     Start(){
@@ -68,6 +69,7 @@ export default class Pictionary extends GameComponent {
         index: 0, 
         index1: 0,
         string: sub,
+        saveNumbers: [],
       });
       if (this.state.number + 2 > this.state.words.length){
         this.setState({  
@@ -80,6 +82,15 @@ export default class Pictionary extends GameComponent {
       }
     }
 
+    checkArray(array, number){
+      for (let i = 0; i < array.length; i++){
+        if (number === array[i]){
+          return true;
+        }
+      }
+      return false;
+    }
+
     render() {
         var id = this.getSessionId();
         var users = this.getSessionUserIds().map((user_id) => (
@@ -89,29 +100,42 @@ export default class Pictionary extends GameComponent {
 
         let prompt = this.state.words[this.state.number];
         
-          let divide = Math.ceil(60 / (prompt.length - 1));
-          
-          if (this.state.currentCount % divide === ((this.state.currentCount % divide)/2)){
-              let random = Math.floor(Math.random() * prompt.length);
-              console.log(random);
-              
-              while (this.state.string[random] !== "_"){
-                if (random % 2 !== 0){
-                    random -= 1; 
-                }
-                random = Math.floor(Math.random() * prompt.length);
+        let divide = Math.ceil(60 / (prompt.length - 1));
+
+        if (this.state.currentCount % divide === ((this.state.currentCount % divide)/2) + 1 && !this.state.bool){
+            this.setState ({ bool: true});
+        }
+
+        if (this.state.currentCount % divide === ((this.state.currentCount % divide)/2) && this.state.bool){
+            let random = Math.floor(Math.random() * this.state.string.length);
+            if (random % 2 !== 0){
+              random -= 1;
+            }
+
+            while (this.checkArray(this.state.saveNumbers, random)){
+              random = Math.floor(Math.random() * this.state.string.length);
+              if (random % 2 !== 0){
+                random -= 1;
               }
+            }
+            if(!this.checkArray(this.state.saveNumbers, random)){
+              this.state.saveNumbers.push(random);
+            } 
+
+            this.state.string[random] = prompt[random / 2];
+            this.setState ({ bool: false})
 
 
-            this.state.string[random * 2] = prompt[random];
-            // if (this.state.currentCount % divide === ((this.state.currentCount % divide)/2) + 2 && !this.state.once){
-            //     this.setState({ once: true});
-            // }
+          // Below code makes the word reveal from beginning letter to end
 
-            // if (this.state.currentCount % divide === ((this.state.currentCount % divide)/2) + 1 && this.state.once){
-            //     this.state.string[this.state.index] = prompt[this.state.index1].toUpperCase();
-            //     this.setState({ index: this.state.index + 2, once: false, index1: this.state.index1 + 1})
-            // }
+          // if (this.state.currentCount % divide === ((this.state.currentCount % divide)/2) + 2 && !this.state.once){
+          //     this.setState({ once: true});
+          // }
+
+          // if (this.state.currentCount % divide === ((this.state.currentCount % divide)/2) + 1 && this.state.once){
+          //     this.state.string[this.state.index] = prompt[this.state.index1].toUpperCase();
+          //     this.setState({ index: this.state.index + 2, once: false, index1: this.state.index1 + 1})
+          // }
         }
           
         
