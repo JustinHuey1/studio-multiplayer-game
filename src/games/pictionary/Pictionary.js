@@ -12,26 +12,72 @@ export default class Pictionary extends GameComponent {
   constructor(props) {
     super(props);
 
-    this.state = { currentCount: 60, Play: true, number: 0, words: ["shark", "pencil", "bicycle", "book"], string: []}
+    this.state = { 
+      currentCount: 60, 
+      // Play: true, 
+      number: 0, 
+      words: ["spongebob", "shark", "pencil", "bicycle", "book"], 
+      string: [],
+      begin: false,
+      end: true,
+      index: 0, 
+      index1: 0, 
+      once: true,
+      }
     };
 
     timer() {
-      this.setState({
-          currentCount: this.state.currentCount - 1,
-          once: true
-      })
+      if (this.state.begin){
+        this.setState({
+            currentCount: this.state.currentCount - 1,
+        })
+      }
       if(this.state.currentCount < 1) { 
-          clearInterval(this.intervalId);
-          this.setState( { Play: false });
+          this.setState( { end: false, begin: false });
       }
     }
 
     componentDidMount() {
-        this.intervalId = setInterval(this.timer.bind(this), 1000);
+        this.intervalId = setInterval(this.timer.bind(this), 50);
     }
 
-    componentWillUnmount(){
-        clearInterval(this.intervalId);
+    Start(){
+      let prompt = this.state.words[this.state.number];
+      let sub = [] 
+      for(let i = 0; i < prompt.length; i++){
+          sub.push("_");
+          sub.push(" ");
+      }
+      this.setState({ 
+        string: sub, 
+        begin: true,
+      });
+    }
+
+    Next(){
+      let prompt = this.state.words[this.state.number];
+      let sub = [] 
+      for(let i = 0; i < prompt.length; i++){
+          sub.push(prompt[i]);
+          sub.push(" ");
+      }
+      this.setState({  
+        currentCount: 60, 
+        begin: false, 
+        end: true, 
+        index: 0, 
+        index1: 0,
+        string: sub,
+      });
+      if (this.state.number + 2 > this.state.words.length){
+        this.setState({  
+          number: 0,
+        });
+      } else {
+        this.setState({  
+          number: this.state.number + 1,
+        });
+      }
     }
 
     render() {
@@ -41,6 +87,35 @@ export default class Pictionary extends GameComponent {
         ));
         var creator = UserApi.getName(this.getSessionCreatorUserId());
 
+        let prompt = this.state.words[this.state.number];
+        // console.log(this.state.string)
+        
+        // while (this.state.index < prompt.length - 1){
+          let divide = Math.ceil(60 / (prompt.length - 1));
+          console.log(Math.ceil(this.state.currentCount % divide));
+          // if (60 % divide === 0){
+          //     let random = Math.floor(Math.random() * prompt.length);
+  
+          //     while (this.state.string[random] !== "_"){
+          //       if (random % 2 !== 0){
+          //           random -= 1; 
+          //       }
+          //       random = Math.floor(Math.random() * this.state.string.length);
+          //     }
+  
+  
+          //     this.state.string[random] = prompt[random/2];
+          //     console.log(this.state.string);
+              if (this.state.currentCount % divide === ((this.state.currentCount % divide)/2) + 1 && !this.state.once){
+                  this.setState({ once: true});
+              }
+
+              if (this.state.currentCount % divide === (this.state.currentCount % divide)/2 && this.state.once){
+                  this.state.string[this.state.index] = prompt[this.state.index1];
+                  this.setState({ index: this.state.index + 2, once: false, index1: this.state.index1 + 1})
+              }
+          // }
+      // }
         
         return (
           <div>
@@ -54,9 +129,11 @@ export default class Pictionary extends GameComponent {
               <Timer time= {this.state.currentCount}/>
             </div>
             <div className= "Board">
-              <Board />
+              <Board playable= {this.state.begin}/>
             </div>
             <div className= "Word">
+              {!this.state.end && <button onClick= {() => this.Next()}>Next</button>}
+              {!this.state.begin && this.state.end && <button onClick= {() => this.Start()}>Start</button>}
               <Word time= {this.state.currentCount} word= {this.state.string} prompt= {prompt}/>
             </div>
           </div>

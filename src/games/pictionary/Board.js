@@ -9,7 +9,7 @@ export default class Board extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { color: "#000000", brushRadius: 5, sum: 0, yes: false}
+        this.state = { color: "#000000", brushRadius: 5, sum: 0, new: true}
 
         this.clearBoard = this.clearBoard.bind(this);
         this.undoBoard = this.undoBoard.bind(this);
@@ -17,7 +17,6 @@ export default class Board extends React.Component {
         
     clearBoard(){
         this.saveableCanvas.clear();
-        console.log("HI")
     };
     
     undoBoard(){
@@ -29,38 +28,32 @@ export default class Board extends React.Component {
     }
 
     render() {
+        if (this.props.playable && this.state.new){
+            this.clearBoard();
+            this.setState({ new: false});
+        } else if (!this.props.playable && !this.state.new){
+            this.setState({ new: true});
+        }
 
         return(
             <div>
                 <div className= "middle">
-                    {this.state.yes === false && <CanvasDraw
+                    <CanvasDraw
                         style={{
                             boxShadow: "0 13px 27px -5px rgba(50, 50, 93, 0.25),    0 8px 16px -8px rgba(0, 0, 0, 0.3)"
                         }}
                         brushColor={this.state.color}
                         ref={canvasDraw => (this.saveableCanvas = canvasDraw)}
                         brushRadius={this.state.brushRadius}
-                        onChange={() => console.log("onChange")}
                         canvasWidth= "700px"
                         lazyRadius= {this.state.sum}
-                    />}
-                    {this.state.yes === true && <CanvasDraw
-                        style={{
-                            boxShadow: "0 13px 27px -5px rgba(50, 50, 93, 0.25),    0 8px 16px -8px rgba(0, 0, 0, 0.3)"
-                        }}
-                        brushColor={this.state.color}
-                        ref={canvasDraw => (this.saveableCanvas = canvasDraw)}
-                        brushRadius={this.state.brushRadius}
-                        onChange={() => console.log("onChange")}
-                        canvasWidth= "700px"
-                        lazyRadius= {this.state.sum}
-                    />}
+                    />
                 </div>
 
                 <div className= "UI">
                     <button className= "clear" onClick= {() => {this.saveableCanvas.clear();}}>Clear</button>
                     <button className= "undo" onClick= {() => {this.saveableCanvas.undo();}}>Undo</button>
-                    <img className= "White" onClick= {() => this.changeColor("#ffffff")} src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcToa7jXAtJYB9GUSKjU90HhIw_4-xTpSYIwsbk5cFEY8CGa37dE&usqp=CAU"></img>
+                    <img className= "White" onClick= {() => {this.changeColor("#ffffff"); }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcToa7jXAtJYB9GUSKjU90HhIw_4-xTpSYIwsbk5cFEY8CGa37dE&usqp=CAU"></img>
                 </div>
 
                 <div className= "UI1">
