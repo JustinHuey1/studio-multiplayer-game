@@ -208,3 +208,30 @@ canvas{
     bottom: 280px;
     right: 50px;
 }
+
+/* Chat */
+.Chat{
+    position: absolute;
+    right: 2%;
+    top: 20%;
+    border: 2px solid aqua;
+    height: 70%;
+    width: 20%;
+}
+
+.chatInput{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
+
+.MuiInputBase-input-172{
+    margin-left: 10%;
+    max-width: 90%;
+    max-height: 20px;
+}
+
+.talk{
+    margin-left: 2%;
+    max-width: 100%;
+}

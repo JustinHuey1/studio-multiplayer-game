@@ -1,6 +1,5 @@
 import React from 'react';
 import firebase from 'firebase';
-import Chat from './Chat.js';
 import CanvasDraw from "react-canvas-draw"; 
 import './Pic.css';
 

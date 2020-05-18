@@ -6,6 +6,7 @@ import Board from './Board.js';
 import Timer from './Timer.js';
 import Player from './Player.js';
 import Word from './Word.js';
+import Chat from './Chat.js';
 import './Pic.css';
 
 export default class Pictionary extends GameComponent {
@@ -23,6 +24,7 @@ export default class Pictionary extends GameComponent {
       index: 0, 
       index1: 0, 
       once: true,
+      blankLetters: 2,
       saveNumbers: [],
       }
     };
@@ -39,7 +41,7 @@ export default class Pictionary extends GameComponent {
     }
 
     componentDidMount() {
-        this.intervalId = setInterval(this.timer.bind(this), 500);
+        this.intervalId = setInterval(this.timer.bind(this), 50);
     }
 
     Start(){
@@ -100,13 +102,15 @@ export default class Pictionary extends GameComponent {
 
         let prompt = this.state.words[this.state.number];
         
-        let divide = Math.ceil(60 / (prompt.length - 1));
+        // If you want more than 1 blank letter at the end, change this.state.blankLetters
+        let divide = Math.ceil(60 / (prompt.length - this.state.blankLetters));
 
-        if (this.state.currentCount % divide === ((this.state.currentCount % divide)/2) + 1 && !this.state.bool){
+        if (this.state.currentCount % divide === ((this.state.currentCount % divide)/2) + 2 && !this.state.bool){
             this.setState ({ bool: true});
         }
 
-        if (this.state.currentCount % divide === ((this.state.currentCount % divide)/2) && this.state.bool){
+        // The letter will be revealed randomly
+        if (this.state.currentCount % divide === ((this.state.currentCount % divide)/2) + 1 && this.state.bool){
             let random = Math.floor(Math.random() * this.state.string.length);
             if (random % 2 !== 0){
               random -= 1;
@@ -118,11 +122,12 @@ export default class Pictionary extends GameComponent {
                 random -= 1;
               }
             }
+
             if(!this.checkArray(this.state.saveNumbers, random)){
               this.state.saveNumbers.push(random);
             } 
 
-            this.state.string[random] = prompt[random / 2];
+            this.state.string[random] = prompt[random / 2].toUpperCase();
             this.setState ({ bool: false})
 
 
@@ -157,6 +162,9 @@ export default class Pictionary extends GameComponent {
               {!this.state.end && <button onClick= {() => this.Next()}>Next</button>}
               {!this.state.begin && this.state.end && <button onClick= {() => this.Start()}>Start</button>}
               <Word time= {this.state.currentCount} word= {this.state.string} prompt= {prompt}/>
+            </div>
+            <div className= "Chat">
+              <Chat playTime= {this.state.begin} answer= {prompt} people= {users}/>
             </div>
           </div>
         );
