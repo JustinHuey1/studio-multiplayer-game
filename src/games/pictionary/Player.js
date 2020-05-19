@@ -19,7 +19,6 @@ export default class Player extends React.Component {
                 this.setState({ concat: "Points: " + this.state.start});
                 this.state.players.push(concat);
                 this.state.points.push(0);
-                console.log(this.state.players)
             }
             this.setState({ once: false})
         }

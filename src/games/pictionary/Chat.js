@@ -58,15 +58,13 @@ export default class Chat extends React.Component {
   }
 
   render() {
-    console.log(this.props.people)
     var chatListItems = this.state.chats.slice(0, 10).map((chat, i) => (
       <ListItem
           key={chat.id}
           style={{opacity: (10 - i) / 10}}
           disabled={true}
           primaryText={UserApi.getName(chat.user)}
-          secondaryText={chat.message}
-          leftAvatar={<Avatar src={UserApi.getPhotoUrl(chat.user)} />} />
+          secondaryText={chat.message} />
     ));
     return (
       <div>

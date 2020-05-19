@@ -44,6 +44,15 @@ export default class Pictionary extends GameComponent {
         this.intervalId = setInterval(this.timer.bind(this), 50);
     }
 
+    getSaveData = () => {
+      // Construct and return the stringified saveData object
+      return JSON.stringify({
+        lines: this.lines,
+        width: this.props.canvasWidth,
+        height: this.props.canvasHeight
+      });
+    };
+
     Start(){
       let prompt = this.state.words[this.state.number];
       let sub = [] 
@@ -51,6 +60,7 @@ export default class Pictionary extends GameComponent {
           sub.push("_");
           sub.push(" ");
       }
+      
       this.setState({ 
         string: sub, 
         begin: true,
@@ -94,6 +104,7 @@ export default class Pictionary extends GameComponent {
     }
 
     render() {
+        console.log(this.state.data);
         var id = this.getSessionId();
         var users = this.getSessionUserIds().map((user_id) => (
           <li key={user_id}>{UserApi.getName(user_id)}</li>
