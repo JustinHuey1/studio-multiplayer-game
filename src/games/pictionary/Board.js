@@ -11,8 +11,6 @@ export default class Board extends React.Component {
         this.state = { color: "#000000", 
         brushRadius: 5, 
         sum: 0, 
-        new: true, 
-        saveDrawing: null,
     }
 
         this.saveableCanvas = React.createRef();
@@ -31,14 +29,7 @@ export default class Board extends React.Component {
     }
 
     render() {
-        if (this.props.playable && this.state.new){
-            this.clearBoard();
-            this.setState({ new: false});
-        } else if (!this.props.playable && !this.state.new){
-            this.setState({ new: true});
-        }
 
-        console.log(this.props.drawer)
         return(
             <div>
                 <div className= "middle">

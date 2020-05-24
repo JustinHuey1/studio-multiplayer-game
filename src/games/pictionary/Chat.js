@@ -51,12 +51,6 @@ export default class Chat extends React.Component {
     this.setState({ show: this.props.people[0].props.children + ": " + this.state.instance, input: " "})
   }
 
-  allMessages(array){
-    for (let i = 0; i < array.length; i++){
-
-    }
-  }
-
   render() {
     var chatListItems = this.state.chats.slice(0, 10).map((chat, i) => (
       <ListItem

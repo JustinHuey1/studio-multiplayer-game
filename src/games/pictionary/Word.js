@@ -15,7 +15,9 @@ export default class Word extends React.Component {
 
         return(
             <div>
-                <h1>{this.props.word}</h1>
+                {this.props.drawer && this.props.playTime && <h1>Draw: <span style={{color: "aqua"}}>{this.props.word}</span></h1>}
+                {!this.props.drawer && this.props.playTime && <h1>{this.props.word}</h1>}
+                {!this.props.playTime && <h1>Word was <span style={{color: "red"}}>{this.props.word}</span></h1>}
             </div>
         );
     }
