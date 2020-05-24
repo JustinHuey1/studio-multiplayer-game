@@ -12,12 +12,14 @@ export default class Player extends React.Component {
         this.state = { once: true, start: 0, players: [], points: []}
         };
         
+    renderPoints(array){
+        let points = array.map((e) => <p>Points: {e}</p>);
+        return points
+    }
+
     render() {
         if (this.state.once){
             for (let i = 0; i < this.props.people.length; i++){
-                let concat = "player" + i;
-                this.setState({ concat: "Points: " + this.state.start});
-                this.state.players.push(concat);
                 this.state.points.push(0);
             }
             this.setState({ once: false})
@@ -26,10 +28,10 @@ export default class Player extends React.Component {
         return(
             <div>
                 <h1>Players: </h1>
-                <ul>
+                <p>
                     {this.props.people}
-                    Points: {this.state.points}
-                </ul> 
+                    {this.renderPoints(this.state.points)}
+                </p> 
             </div>
         );
     }

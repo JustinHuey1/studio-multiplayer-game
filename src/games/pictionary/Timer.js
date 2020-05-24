@@ -11,11 +11,12 @@ export default class Timer extends React.Component {
         };
 
     render() {
-
+        
         return(
             <div>
                 <div className= "Timer">
-                    <h1>Time Left: {this.props.time}</h1>
+                    {!this.props.break && <h1>Time Left: {this.props.time}</h1>}
+                    {this.props.break && <h1>Break Left: {this.props.fake}</h1>}
                 </div>
             </div>
         );

@@ -12,10 +12,9 @@ export default class Board extends React.Component {
         brushRadius: 5, 
         sum: 0, 
         new: true, 
-        saveDrawing: null}
+        saveDrawing: null,
+    }
 
-        this.clearBoard = this.clearBoard.bind(this);
-        this.undoBoard = this.undoBoard.bind(this);
         this.saveableCanvas = React.createRef();
         };
         
@@ -31,17 +30,7 @@ export default class Board extends React.Component {
         this.setState({ color: type});
     }
 
-    getSaveData = () => {
-        // Construct and return the stringified saveData object
-        return JSON.stringify({
-          lines: this.lines,
-          width: this.props.canvasWidth,
-          height: this.props.canvasHeight
-        });
-      };
-
     render() {
-        console.log(this.saveableCanvas)
         if (this.props.playable && this.state.new){
             this.clearBoard();
             this.setState({ new: false});
@@ -49,16 +38,11 @@ export default class Board extends React.Component {
             this.setState({ new: true});
         }
 
+        console.log(this.props.drawer)
         return(
             <div>
                 <div className= "middle">
-                {/* <button onClick={() => {
-                    const {saveableCanvas} = this;
-                this.setState({saveDrawing: this.saveableCanvas.getSaveData()});
-                }}>asajdoiqhdiuasdas</button>
-                <button onClick={() => {
-                    const {saveableCanvas} = this;
-                this.saveableCanvas.loadSaveData(this.state.saveDrawing, true)}}>Load</button> */}
+                    {this.props.drawer &&
                     <CanvasDraw
                         style={{
                             boxShadow: "0 13px 27px -5px rgba(50, 50, 93, 0.25),    0 8px 16px -8px rgba(0, 0, 0, 0.3)"
@@ -70,8 +54,24 @@ export default class Board extends React.Component {
                         lazyRadius= {this.state.sum}
                         onChange= {this.saveableCanvas.getSaveData}
                     />
+                    }
+                    {!this.props.drawer &&
+                    <CanvasDraw
+                        style={{
+                            boxShadow: "0 13px 27px -5px rgba(50, 50, 93, 0.25),    0 8px 16px -8px rgba(0, 0, 0, 0.3)"
+                        }}
+                        brushColor={this.state.color}
+                        ref={canvasDraw => (this.saveableCanvas = canvasDraw)}
+                        brushRadius={this.state.brushRadius}
+                        canvasWidth= "700px"
+                        lazyRadius= {this.state.sum}
+                        onChange= {this.saveableCanvas.getSaveData}
+                        disabled= "true"
+                    />
+                    }
                 </div>
-
+                
+                {this.props.drawer && <div>
                 <div className= "UI">
                     <button className= "clear" onClick= {() => {this.clearBoard();}}>Clear</button>
                     <button className= "undo" onClick= {() => {this.undoBoard();}}>Undo</button>
@@ -111,6 +111,8 @@ export default class Board extends React.Component {
                         <button className= "tDawn" onClick= {() => this.changeColor("#BDC3B9")}>Gray</button>
                     </div>
                 </div>
+            </div>}
+
             </div>
         );
     }

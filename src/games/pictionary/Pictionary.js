@@ -15,74 +15,88 @@ export default class Pictionary extends GameComponent {
 
     this.state = { 
       currentCount: 60, 
+      fakeCount: 10,
       // Play: true, 
       number: 0, 
       words: ["codenation", "spongebob", "shark", "pencil", "bicycle", "book", "igloo", "pizza", "dragon", ], 
       string: [],
       begin: false,
-      end: true,
-      index: 0, 
-      index1: 0, 
       once: true,
       blankLetters: 2,
       saveNumbers: [],
+      break: false,
+      currentUser: this.getMyUserId(),
+      gameUsers: [],
+      userDrawer: 0,
       }
+    
     };
 
     timer() {
       if (this.state.begin){
         this.setState({
-            currentCount: this.state.currentCount - 1,
+          currentCount: this.state.currentCount - 1,
+        });
+      } else if (this.state.break){
+        this.setState({
+          fakeCount: this.state.fakeCount - 1,
         })
       }
+
       if(this.state.currentCount < 1) { 
-          this.setState( { end: false, begin: false });
+          this.setState({ 
+            begin: false, 
+            break: true, 
+          });    
+      }
+
+      if(this.state.break){
+        this.Show();
+        if (this.state.fakeCount < 1){
+          this.setState({ 
+            break: false,
+            currentCount: 60, 
+            begin: false, 
+            saveNumbers: [],
+          })
+          this.Next();
+          this.Start();
+        }
       }
     }
 
     componentDidMount() {
-        this.intervalId = setInterval(this.timer.bind(this), 50);
+        this.intervalId = setInterval(this.timer.bind(this), 500);
     }
-
-    getSaveData = () => {
-      // Construct and return the stringified saveData object
-      return JSON.stringify({
-        lines: this.lines,
-        width: this.props.canvasWidth,
-        height: this.props.canvasHeight
-      });
-    };
 
     Start(){
       let prompt = this.state.words[this.state.number];
-      let sub = [] 
-      for(let i = 0; i < prompt.length; i++){
-          sub.push("_");
-          sub.push(" ");
+      let sub = [] ;
+
+      if (this.state.currentUser === this.state.gameUsers[this.state.userDrawer]){   
+        this.setState({ meDrawer: true})
+      } else {
+        this.setState({ meDrawer: false})
+        for(let i = 0; i < prompt.length; i++){
+            sub.push("_");
+            sub.push(" ");
+        }    
       }
-      
+
       this.setState({ 
         string: sub, 
         begin: true,
+        fakeCount: 10,
+      });
+
+      this.getSessionDatabaseRef().set(this.state.string, error => {
+        if (error) {
+          console.error("Error updating Kevin state", error);
+        }
       });
     }
 
     Next(){
-      let prompt = this.state.words[this.state.number];
-      let sub = [] 
-      for(let i = 0; i < prompt.length; i++){
-          sub.push(prompt[i].toUpperCase());
-          sub.push(" ");
-      }
-      this.setState({  
-        currentCount: 60, 
-        begin: false, 
-        end: true, 
-        index: 0, 
-        index1: 0,
-        string: sub,
-        saveNumbers: [],
-      });
       if (this.state.number + 2 > this.state.words.length){
         this.setState({  
           number: 0,
@@ -92,26 +106,30 @@ export default class Pictionary extends GameComponent {
           number: this.state.number + 1,
         });
       }
-    }
 
-    checkArray(array, number){
-      for (let i = 0; i < array.length; i++){
-        if (number === array[i]){
-          return true;
-        }
+      if (this.userDrawer + 1 > this.state.gameUsers.length){
+        this.setState({ userDrawer: 0});
+      } else {
+        this.setState({ userDrawer: this.state.userDrawer + 1 });
       }
-      return false;
     }
 
-    render() {
-        console.log(this.state.data);
-        var id = this.getSessionId();
-        var users = this.getSessionUserIds().map((user_id) => (
-          <li key={user_id}>{UserApi.getName(user_id)}</li>
-        ));
-        var creator = UserApi.getName(this.getSessionCreatorUserId());
+    Show(){
+      let prompt = this.state.words[this.state.number];
+      let sub = [] 
+      for(let i = 0; i < prompt.length; i++){
+          sub.push(prompt[i].toUpperCase());
+          sub.push(" ");
+      }
 
-        let prompt = this.state.words[this.state.number];
+      this.setState({  
+        string: sub,
+      });
+
+    }
+
+    Information(){
+      let prompt = this.state.words[this.state.number];
         
         // If you want more than 1 blank letter at the end, change this.state.blankLetters
         let divide = Math.ceil(60 / (prompt.length - this.state.blankLetters));
@@ -120,7 +138,7 @@ export default class Pictionary extends GameComponent {
             this.setState ({ bool: true});
         }
 
-        // The letter will be revealed randomly
+        // A letter will be revealed randomly
         if (this.state.currentCount % divide === ((this.state.currentCount % divide)/2) + 1 && this.state.bool){
             let random = Math.floor(Math.random() * this.state.string.length);
             if (random % 2 !== 0){
@@ -140,21 +158,70 @@ export default class Pictionary extends GameComponent {
 
             this.state.string[random] = prompt[random / 2].toUpperCase();
             this.setState ({ bool: false})
-
-
-          // Below code makes the word reveal from beginning letter to end
-
-          // if (this.state.currentCount % divide === ((this.state.currentCount % divide)/2) + 2 && !this.state.once){
-          //     this.setState({ once: true});
-          // }
-
-          // if (this.state.currentCount % divide === ((this.state.currentCount % divide)/2) + 1 && this.state.once){
-          //     this.state.string[this.state.index] = prompt[this.state.index1].toUpperCase();
-          //     this.setState({ index: this.state.index + 2, once: false, index1: this.state.index1 + 1})
-          // }
         }
-          
+    }
+
+    checkArray(array, number){
+      for (let i = 0; i < array.length; i++){
+        if (number === array[i]){
+          return true;
+        }
+      }
+      return false;
+    }
+
+    changeInfo(){
+      let information = {
         
+      }
+
+      this.getSessionDatabaseRef().set(information, error => {
+        if (error) {
+          console.error("Error updating Kevin state", error);
+        }
+      });
+    }
+
+    onSessionDataChanged(data) {
+      this.setState({
+      // Play: true, 
+        number: data.number, 
+        string: data.string,
+        begin: data.begin,
+        once: data.once,
+        blankLetters: 2,
+        saveNumbers: data.saveNumbers,
+        break: data.break,
+        currentUser: data.currentUser,
+        gameUsers: data.gameUsers,
+        userDrawer: data.userDrawer,
+      });
+      console.log("yes")
+    }
+
+    render() {
+        var id = this.getSessionId();
+        var users = this.getSessionUserIds().map((user_id) => (
+          <li key={user_id}>{UserApi.getName(user_id)}</li>
+        ));
+
+        var users1 = this.getSessionUserIds().map((user_id) => (
+          this.state.gameUsers.push(user_id)
+        ));
+        
+        var creator = UserApi.getName(this.getSessionCreatorUserId());
+          
+        if (this.state.currentUser === this.state.gameUsers[this.state.userDrawer]){
+          this.state.string = "Draw Word: " + this.state.words[this.state.number].toUpperCase();
+        } else {
+          this.Information();
+        }
+
+        if (this.state.gameUsers.length > 0 && this.state.once){
+          this.Start();
+          this.setState({ once: false})
+        }
+
         return (
           <div>
             <p>Session ID: {id}</p>
@@ -164,14 +231,13 @@ export default class Pictionary extends GameComponent {
               <Player people= {users}/>
             </div>
             <div className= "Timer">
-              <Timer time= {this.state.currentCount}/>
+              <Timer time= {this.state.currentCount} break= {this.state.break} fake= {this.state.fakeCount}/>
             </div>
             <div className= "Board">
-              <Board playable= {this.state.begin}/>
+              {/* <Board playable= {this.state.begin}/> */}
+              {!this.state.break && <Board playable= {this.state.begin} drawer= {this.state.meDrawer}/>}
             </div>
             <div className= "Word">
-              {!this.state.end && <button onClick= {() => this.Next()}>Next</button>}
-              {!this.state.begin && this.state.end && <button onClick= {() => this.Start()}>Start</button>}
               <Word time= {this.state.currentCount} word= {this.state.string} prompt= {prompt}/>
             </div>
             <div className= "Chat">
