@@ -226,7 +226,6 @@ export default class Pictionary extends GameComponent {
           <div>
             <p>Session ID: {id}</p>
             <p>Session creator: {creator}</p>
-            
             <div className= "Players">
               <Player people= {users}/>
             </div>
