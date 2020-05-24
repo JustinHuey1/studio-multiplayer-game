@@ -1,6 +1,7 @@
 import GameComponent from '../../GameComponent.js';
 import React from 'react';
 import firebase from 'firebase';
+import { HashRouter, Route, Switch } from "react-router-dom";
 import UserApi from '../../UserApi.js';
 import Board from './Board.js';
 import Timer from './Timer.js';
@@ -224,25 +225,27 @@ export default class Pictionary extends GameComponent {
 
         return (
           <div>
-            <p>Session ID: {id}</p>
-            <p>Session creator: {creator}</p>
-            
-            <div className= "Players">
-              <Player people= {users}/>
-            </div>
-            <div className= "Timer">
-              <Timer time= {this.state.currentCount} break= {this.state.break} fake= {this.state.fakeCount}/>
-            </div>
-            <div className= "Board">
-              {/* <Board playable= {this.state.begin}/> */}
-              {!this.state.break && <Board playable= {this.state.begin} drawer= {this.state.meDrawer}/>}
-            </div>
-            <div className= "Word">
-              <Word time= {this.state.currentCount} word= {this.state.string} prompt= {prompt}/>
-            </div>
-            <div className= "Chat">
-              <Chat playTime= {this.state.begin} answer= {prompt} people= {users}/>
-            </div>
+            <HashRouter basename={process.env.PUBLIC_URL}>
+              <p>Session ID: {id}</p>
+              <p>Session creator: {creator}</p>
+              
+              <div className= "Players">
+                <Player people= {users}/>
+              </div>
+              <div className= "Timer">
+                <Timer time= {this.state.currentCount} break= {this.state.break} fake= {this.state.fakeCount}/>
+              </div>
+              <div className= "Board">
+                {/* <Board playable= {this.state.begin}/> */}
+                {!this.state.break && <Board playable= {this.state.begin} drawer= {this.state.meDrawer}/>}
+              </div>
+              <div className= "Word">
+                <Word time= {this.state.currentCount} word= {this.state.string} prompt= {prompt}/>
+              </div>
+              <div className= "Chat">
+                <Chat playTime= {this.state.begin} answer= {prompt} people= {users}/>
+              </div>
+            </HashRouter>
           </div>
         );
       }
