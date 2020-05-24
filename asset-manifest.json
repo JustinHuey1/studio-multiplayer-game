@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/studio-multiplayer-game/static/css/main.328a37ae.chunk.css",
+    "main.js": "/studio-multiplayer-game/static/js/main.124534f1.chunk.js",
+    "main.js.map": "/studio-multiplayer-game/static/js/main.124534f1.chunk.js.map",
+    "runtime-main.js": "/studio-multiplayer-game/static/js/runtime-main.558293e5.js",
+    "runtime-main.js.map": "/studio-multiplayer-game/static/js/runtime-main.558293e5.js.map",
+    "static/js/2.6617d526.chunk.js": "/studio-multiplayer-game/static/js/2.6617d526.chunk.js",
+    "static/js/2.6617d526.chunk.js.map": "/studio-multiplayer-game/static/js/2.6617d526.chunk.js.map",
+    "index.html": "/studio-multiplayer-game/index.html",
+    "precache-manifest.c04d1a2ee1fa574a4b5cf04ac85d5499.js": "/studio-multiplayer-game/precache-manifest.c04d1a2ee1fa574a4b5cf04ac85d5499.js",
+    "service-worker.js": "/studio-multiplayer-game/service-worker.js",
+    "static/css/main.328a37ae.chunk.css.map": "/studio-multiplayer-game/static/css/main.328a37ae.chunk.css.map",
+    "static/js/2.6617d526.chunk.js.LICENSE.txt": "/studio-multiplayer-game/static/js/2.6617d526.chunk.js.LICENSE.txt",
+    "static/media/Logo.png": "/studio-multiplayer-game/static/media/Logo.4454a02b.png",
+    "static/media/Whisper icon.png": "/studio-multiplayer-game/static/media/Whisper icon.1687bbe5.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.558293e5.js",
+    "static/js/2.6617d526.chunk.js",
+    "static/css/main.328a37ae.chunk.css",
+    "static/js/main.124534f1.chunk.js"
+  ]
+}
