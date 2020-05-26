@@ -9,28 +9,27 @@ export default class Player extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { once: true, start: 0, players: [], points: []}
+        this.state = { start: 0, players: this.props.people, points: [], onScreen: []}
         };
-        
-    renderPoints(array){
-        let points = array.map((e) => <p>Points: {e}</p>);
-        return points
+
+    renderPlayers(array){
+        for (let i = 0; i < array.length; i++){
+            this.state.onScreen.push(<div><p><li><img style={{height: "20px"}} src={this.props.pics[i]}></img></li>{this.state.players[i]}</p><p>Points: {this.state.points[i]}</p></div>);
+        }
     }
 
     render() {
-        if (this.state.once){
-            for (let i = 0; i < this.props.people.length; i++){
-                this.state.points.push(0);
-            }
-            this.setState({ once: false})
+
+        while (this.state.players.length > this.state.points.length){
+            this.state.points.push(0);
         }
 
         return(
             <div>
                 <h1>Players: </h1>
                 <p>
-                    {this.props.people}
-                    {this.renderPoints(this.state.points)}
+                    {this.renderPlayers(this.state.players)}
+                    {this.state.onScreen}
                 </p> 
             </div>
         );

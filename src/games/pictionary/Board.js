@@ -11,29 +11,49 @@ export default class Board extends React.Component {
         this.state = { color: "#000000", 
         brushRadius: 5, 
         sum: 0, 
+        saveData: null,
     }
 
         this.saveableCanvas = React.createRef();
         };
         
-    clearBoard(){
-        this.saveableCanvas.clear();
-    };
+    // clearBoard(){
+    //     this.saveableCanvas.clear();
+    // };
     
-    undoBoard(){
-        this.saveableCanvas.undo();
-    }
+    // undoBoard(){
+    //     this.saveableCanvas.undo();
+    // }
 
-    changeColor(type){
-        this.setState({ color: type});
-    }
+    // changeColor(type){
+    //     this.setState({ color: type});
+    // }
+
+    // save(){
+    //     this.setState({ saveData: this.saveableCanvas.getSaveData()});
+    //     let information = {
+    //         saveData: this.saveableCanvas.getSaveData()
+    //     }
+    //     this.getSessionDatabaseRef().set(information, error => {
+    //         if (error) {
+    //           console.error("Error updating Kevin state", error);
+    //         }
+    //       });
+    // }
+
+    // load(){
+    //     this.saveableCanvas.loadSaveData(this.state.saveData, true)
+    // }
 
     render() {
 
         return(
             <div>
+                <button onClick= {() => this.save()}>save</button>
+                <button onClick= {() => this.load()}>show</button>
+
                 <div className= "middle">
-                    {this.props.drawer &&
+                    {/* {this.props.drawer &&
                     <CanvasDraw
                         style={{
                             boxShadow: "0 13px 27px -5px rgba(50, 50, 93, 0.25),    0 8px 16px -8px rgba(0, 0, 0, 0.3)"
@@ -43,7 +63,8 @@ export default class Board extends React.Component {
                         brushRadius={this.state.brushRadius}
                         canvasWidth= "700px"
                         lazyRadius= {this.state.sum}
-                        onChange= {this.saveableCanvas.getSaveData}
+                        onChange=  {() => this.props.save()}
+                        hideGrid= "true"
                     />
                     }
                     {!this.props.drawer &&
@@ -56,10 +77,12 @@ export default class Board extends React.Component {
                         brushRadius={this.state.brushRadius}
                         canvasWidth= "700px"
                         lazyRadius= {this.state.sum}
-                        onChange= {this.saveableCanvas.getSaveData}
+                        // onChange= {this.load()}
                         disabled= "true"
-                    />
-                    }
+                        hideGrid= "true"
+                        saveData= {this.props.saveData}
+                    />  
+                    } */}
                 </div>
                 
                 {this.props.drawer && <div>
