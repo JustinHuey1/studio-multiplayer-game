@@ -204,9 +204,9 @@ canvas{
 .Word{
     display: flex;
     justify-content: center;
-    position: relative; 
-    bottom: 400px;
-    right: 50px;
+    position: absolute; 
+    bottom: 80%;
+    left: 43%;
 }
 
 /* Chat */
