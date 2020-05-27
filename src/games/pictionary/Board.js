@@ -14,8 +14,7 @@ export default class Board extends React.Component {
         saveData: null,
     }
 
-        // this.saveableCanvas = React.createRef();
-        // this.loadableCanvas = React.createRef();
+        this.saveableCanvas = React.createRef();
         };
         
     // clearBoard(){
@@ -50,8 +49,6 @@ export default class Board extends React.Component {
 
         return(
             <div>
-                {/* <button onClick= {() => this.props.save()}>save</button>
-                <button onClick= {() => this.props.load()}>show</button> */}
 
                 <div className= "middle">
                     {/* {this.props.drawer &&
@@ -74,7 +71,7 @@ export default class Board extends React.Component {
                             boxShadow: "0 13px 27px -5px rgba(50, 50, 93, 0.25),    0 8px 16px -8px rgba(0, 0, 0, 0.3)"
                         }}
                         brushColor={this.state.color}
-                        ref={canvasDraw => (this.loadableCanvas = canvasDraw)}
+                        ref={canvasDraw => (this.saveableCanvas = canvasDraw)}
                         brushRadius={this.state.brushRadius}
                         canvasWidth= "700px"
                         lazyRadius= {this.state.sum}
@@ -88,9 +85,9 @@ export default class Board extends React.Component {
                 
                 {this.props.drawer && <div>
                 <div className= "UI">
-                    <button className= "clear" onClick= {() => this.props.saveAble.clear()}>Clear</button>
-                    <button className= "undo" onClick= {() => this.props.saveAble.undo()}>Undo</button>
-                    <img className= "White" onClick= {() => this.props.color("#ffffff")} src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcToa7jXAtJYB9GUSKjU90HhIw_4-xTpSYIwsbk5cFEY8CGa37dE&usqp=CAU"></img>
+                    <button className= "clear" onClick= {() => {this.props.clear();}}>Clear</button>
+                    <button className= "undo" onClick= {() => {this.props.undo();}}>Undo</button>
+                    <img className= "White" onClick= {() => {this.props.color("#ffffff"); }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcToa7jXAtJYB9GUSKjU90HhIw_4-xTpSYIwsbk5cFEY8CGa37dE&usqp=CAU"></img>
                 </div>
 
                 <div className= "UI1">
@@ -98,9 +95,9 @@ export default class Board extends React.Component {
                         Pen Radius: 
                         <input
                             type="number"
-                            value={this.props.brushRadius}
+                            value={this.props.brush}
                             onChange={e =>
-                                this.props.radius(e.target.value)
+                                {this.props.radius(e.target.value)}
                             }
                         />
                     </label>

@@ -13,17 +13,17 @@ import TwentyOneQuestions from './games/twentyOneQuestions/TwentyOneQuestions.js
 import burst_Forth from "./games/Burst_Forth/burstForth.js";
 import fight from "./games/fight/fight.js";
 import uno from './games/uno/uno.js';
-import PictionaryV2 from './games/pictionary/PictionaryV2.js';
+import Pictionary from './games/pictionary/Pictionary.js';
 
 const gameData = {
 
-  PictionaryV2: {
+  Pictionary: {
     title: "Pictionary",
     authors: "Justin Huey",
     description: "Draw and guess",
     minUsers: 1,
     maxUsers: 5,
-    component: PictionaryV2,
+    component: Pictionary,
   },
 
   chatroom: {
