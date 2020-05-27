@@ -223,6 +223,8 @@ canvas{
     position: absolute;
     bottom: 0px;
     width: 100%;
+    max-width: 100%;
+    min-width: 100%;;
 }
 
 .MuiInputBase-input-172{

@@ -68,6 +68,7 @@ export default class Pictionary extends GameComponent {
           this.Next();
           this.Start();
           this.displayData = []
+
         }
       }
     }
@@ -98,6 +99,7 @@ export default class Pictionary extends GameComponent {
         saveNumbers: [],
         answered: [false, false],
         postVal: "",
+        saveData: ""
       });
 
     }
@@ -192,7 +194,7 @@ export default class Pictionary extends GameComponent {
 
     save(){
         this.setState({ saveData: this.saveableCanvas.getSaveData()});
-        this.changeInfo();
+        // this.changeInfo();
     }
 
     load(){
@@ -328,6 +330,7 @@ export default class Pictionary extends GameComponent {
                         lazyRadius= {this.state.sum}
                         // onChange=  {() => this.save()}
                         hideGrid= "true"
+                    
                     />
                       }
                     {!this.state.meDrawer &&

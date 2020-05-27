@@ -4,7 +4,6 @@ import UserApi from "../../UserApi.js";
 import gameData from "../../gameData.js";
 import CanvasDraw from "react-canvas-draw";
 import ReactDOM from "react-dom";
-import gameData from "../../gameData.js";
 
 import "./Pic.css";
 
